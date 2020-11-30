@@ -1,9 +1,24 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 var rename = require("gulp-rename");
 var concat = require("gulp-concat");
 
 const src = {
+  es6: [
+      './src/orb.js',
+      './src/core.js',
+      './src/time.js',
+      './src/earth.js',
+      './src/nutation.js',
+      './src/coordinates.js',
+      './src/observation.js',
+      './src/sgp4.js',
+      './src/kepler.js',
+      './src/sun.js',
+      './src/luna.js',
+      './src/vsop.js',
+      './src/export.js'
+  ],
   all: [
     './src/orb.js',
     './src/core.js',
@@ -68,6 +83,11 @@ const concat_scripts = function (done) {
   gulp.src(src.satellite)
     .pipe(concat('orb-satellite.v2.js'))
     .pipe(gulp.dest('./build'));
+
+  gulp.src(src.es6)
+    .pipe(concat('orb-v2.es6.js'))
+    .pipe(gulp.dest('./build'));
+
   done()
   return
 }
